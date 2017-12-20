@@ -168,7 +168,7 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     @Override
-    public BaseResult modifySaleStatus(String saleStatus, Long goodsId) {
+    public BaseResult updateSaleStatus(String saleStatus, Long goodsId) {
         if (StringUtils.isEmpty(saleStatus) || null == goodsId) {
             return BaseResult.parameterError();
         }

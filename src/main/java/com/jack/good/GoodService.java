@@ -56,7 +56,7 @@ public interface GoodService {
      * @param goodId     商品id
      * @return
      */
-    BaseResult modifySaleStatus(String saleStatus, Long goodId);
+    BaseResult updateSaleStatus(String saleStatus, Long goodId);
 
     /**
      * 根据商品id删除商品
