@@ -198,7 +198,7 @@
         <if test="isNew!=null and isNew!=''">AND good.is_new= #{isNew}</if>
         <if test="isFreight!=null and isFreight!=''">AND good.freight= #{freight}</if>
         <if test="brandId!=null ">AND good.brand_id= #{brandId}</if>
-        <if test="activityId!=null ">AND tacg.activity_id= #{activityId} AND tacg.status!='NORMAL'</if>
+        <if test="activityId!=null ">AND tacg.activity_id= #{activityId} AND tacg.status='NORMAL'</if>
         <if test="categoryId!=null ">AND categorygood.category_id= #{categoryId}</if>
         GROUP BY good.id
     </select>
