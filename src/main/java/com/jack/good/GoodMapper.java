@@ -76,7 +76,7 @@ public interface GoodMapper {
      * @param idList 商品id
      * @return
      */
-    int batchDeleteGood(@Param("idList") List<Long> idList);
+    int deleteByIdList(@Param("idList") List<Long> idList);
 
     /**
      * 库存反还

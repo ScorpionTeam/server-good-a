@@ -161,7 +161,7 @@
     </update>
 
     <!--批量删除商品-->
-    <update id="batchDeleteGood">
+    <update id="deleteByIdList">
         UPDATE t_good
         SET status='UN_NORMAL',
         last_update_date=now()

@@ -198,7 +198,7 @@ public class GoodServiceImpl implements GoodService {
         }
         List<Long> idList = new ArrayList<>();
         idList.add(id);
-        int result = goodMapper.batchDeleteGood(idList);
+        int result = goodMapper.deleteByIdList(idList);
         if (result > 0) {
             return BaseResult.success("删除商品成功");
         }
@@ -213,11 +213,11 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     @Override
-    public BaseResult batchDeleteGood(List<Long> idList) {
+    public BaseResult deleteByIdList(List<Long> idList) {
         if (idList == null || idList.size() == 0) {
             return BaseResult.parameterError();
         }
-        int result = goodMapper.batchDeleteGood(idList);
+        int result = goodMapper.deleteByIdList(idList);
         if (result == 0) {
             return BaseResult.error("ERROR", "商品未下架，不能删除");
         }

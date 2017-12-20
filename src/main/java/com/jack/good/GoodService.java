@@ -72,7 +72,7 @@ public interface GoodService {
      * @param idList 商品id集合
      * @return
      */
-    BaseResult batchDeleteGood(List<Long> idList);
+    BaseResult deleteByIdList(List<Long> idList);
 
     /**
      * 商品库存减扣

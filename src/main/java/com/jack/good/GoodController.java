@@ -51,10 +51,10 @@ public class GoodController {
      *
      * @return
      */
-    @PostMapping(value = "/batchDeleteGood")
-    public BaseResult batchDeleteGood(@RequestBody JSONObject jsonObject) {
+    @PostMapping(value = "/deleteByIdList")
+    public BaseResult deleteByIdList(@RequestBody JSONObject jsonObject) {
         List<Long> idList = jsonObject.getJSONArray("idList").toJavaList(Long.class);
-        return goodService.batchDeleteGood(idList);
+        return goodService.deleteByIdList(idList);
     }
 
     /**
