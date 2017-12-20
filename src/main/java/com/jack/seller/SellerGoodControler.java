@@ -95,12 +95,12 @@ public class SellerGoodControler {
      * @param object
      * @return
      */
-    @PostMapping(value = "/batchModifySaleStatus")
+    @PostMapping(value = "/batchUpdateSaleStatus")
     public BaseResult batchUpdateSaleStatus(@RequestBody JSONObject object) {
         //ON_SALE上架 OFF_SALE下架 默认上架
         String saleStatus = object.getString("saleStatus");
         //商品id集合
-        List<Long> goodsIdList = object.getJSONArray("goodsIdList").toJavaList(Long.class);
+        List<Long> goodsIdList = object.getJSONArray("goodIdList").toJavaList(Long.class);
         return sellerGoodService.batchUpdateSaleStatus(saleStatus, goodsIdList);
     }
 

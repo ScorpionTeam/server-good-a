@@ -99,19 +99,14 @@
         <if test="description!=null">description=#{description},</if>
         <if test="promotion!=null">promotion=#{promotion},</if>
         <if test="price!=null">price=#{price},</if>
-        <if test="saleVolume!=null">sale_volume=#{saleVolume},</if>
         <if test="discount!=null">discount=#{discount},</if>
         <if test="stock!=null">stock=#{stock},</if>
-        <if test="onSale!=null">on_sale=#{onSale},</if>
         <if test="hot!=null">hot=#{hot},</if>
         <if test="isNew!=null">is_new=#{isNew},</if>
         <if test="freight!=null">freight=#{freight},</if>
         <if test="brandId!=null">brand_id=#{brandId},</if>
-        <if test="sellerId!=null">seller_id=#{sellerId},</if>
-        <if test="visitTotal!=null">visit_total=#{visitTotal},</if>
         <if test="goodNo!=null">good_no=#{goodNo},</if>
         <if test="mainImageUrl!=null">main_image_url=#{mainImageUrl},</if>
-        <if test="status!=null">status=#{status},</if>
         <if test="richContent!=null">rich_content=#{richContent},</if>
         <if test="seo!=null">seo=#{seo},</if>
         last_update_date=NOW()
@@ -143,7 +138,8 @@
 
     <!--库存扣减-->
     <update id="updateGoodStock">
-        UPDATE t_good SET stock=stock+#{count} WHERE id=#{goodId}
+        UPDATE t_good SET
+        stock=stock+#{count} WHERE id=#{goodId}
     </update>
 
     <!--列表查询-->
@@ -198,7 +194,7 @@
         </if>
         <if test="goodNo!=null and goodNo!=''">AND good.good_no= #{goodNo}</if>
         <if test="saleStatus!=null and saleStatus!=''">AND good.on_sale= #{saleStatus}</if>
-        <if test="isHot!=null and isHot!=''">AND good.hot= #{hot}</if>
+        <if test="hot!=null and hot!=''">AND good.hot= #{hot}</if>
         <if test="isNew!=null and isNew!=''">AND good.is_new= #{isNew}</if>
         <if test="isFreight!=null and isFreight!=''">AND good.freight= #{freight}</if>
         <if test="brandId!=null ">AND good.brand_id= #{brandId}</if>
@@ -315,7 +311,7 @@
         <if test="startDate==null and endDate!=null">AND good.create_date BETWEEN '1970-01-01' AND #{endDate}</if>
         <if test="startDate!=null and endDate==null">AND good.create_date BETWEEN #{startDate} AND now()</if>
         <if test="saleStatus!=null and saleStatus!=''">AND good.on_sale= #{saleStatus}</if>
-        <if test="isHot!=null and isHot!=''">AND good.hot= #{hot}</if>
+        <if test="hot!=null and hot!=''">AND good.hot= #{hot}</if>
         <if test="isNew!=null and isNew!=''">AND good.is_new= #{isNew}</if>
         <if test="isFreight!=null and isFreight!=''">AND good.freight= #{freight}</if>
         <if test="goodNo!=null and goodNo!=''">AND good.good_no= #{goodNo}</if>

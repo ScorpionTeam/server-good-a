@@ -33,7 +33,7 @@ public class GoodRequestParams extends PageRequestParams {
     /**
      * 热销 是否热销 HOT", "热销 NOT_HOT", "非热销
      */
-    private String isHot;
+    private String hot;
     /**
      * 新品 是否新品 IS_NEW", "新品 NOT_NEW", "非新品
      */
@@ -144,12 +144,12 @@ public class GoodRequestParams extends PageRequestParams {
         this.categoryId = categoryId;
     }
 
-    public String getIsHot() {
-        return isHot;
+    public String getHot() {
+        return hot;
     }
 
-    public void setIsHot(String isHot) {
-        this.isHot = isHot;
+    public void setHot(String hot) {
+        this.hot = hot;
     }
 
     public String getIsNew() {
@@ -193,7 +193,7 @@ public class GoodRequestParams extends PageRequestParams {
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 ", categoryId=" + categoryId +
-                ", isHot='" + isHot + '\'' +
+                ", hot='" + hot + '\'' +
                 ", isNew='" + isNew + '\'' +
                 ", isFreight='" + isFreight + '\'' +
                 ", brandId=" + brandId +

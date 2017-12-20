@@ -113,10 +113,11 @@ public class SellerGoodServiceImpl implements SellerGoodService {
             //商品上架状态，不能修改
             return BaseResult.error("update_error", "商品为上架状态，不能修改");
         }
+        boolean unbindFlag = goodExt.getCategoryId() != null && !goodExt.getCategoryId().equals(localGood.getCategoryId());
         if (localGood.getCategoryId() != null && goodExt.getCategoryId() == null) {
             //类目解绑
             unbindCategoryGood(localGood.getId());
-        } else if (!goodExt.getCategoryId().equals(localGood.getCategoryId())) {
+        } else if (unbindFlag) {
             //类目解绑
             unbindCategoryGood(localGood.getId());
             //绑定类目
@@ -155,9 +156,6 @@ public class SellerGoodServiceImpl implements SellerGoodService {
         if (result == 0) {
             return BaseResult.error("batch_error", "删除失败");
         }
-        if (idList.size() > result) {
-            return BaseResult.success("部分商品删除失败");
-        }
         idList.forEach(goodId -> saveGoodLog(goodId, "", "批量删除商品"));
         return BaseResult.success("删除成功");
     }
@@ -172,31 +170,31 @@ public class SellerGoodServiceImpl implements SellerGoodService {
     @Override
     public BaseResult updateGoodStock(Long id, Integer count) {
         int result = sellerGoodMapper.updateGoodStock(id, count);
-        if (result > 0) {
-            GoodExt good = sellerGoodMapper.findById(id);
-            saveGoodLog(good.getId(), good.getGoodName(), "修改商品库存");
-            return BaseResult.success("修改成功");
+        if (result == 0) {
+            return BaseResult.error("update_stock_error", "修改失败");
         }
-        return BaseResult.error("update_stock_error", "修改失败");
+        GoodExt good = sellerGoodMapper.findById(id);
+        saveGoodLog(good.getId(), good.getGoodName(), "修改商品库存");
+        return BaseResult.success("修改成功");
     }
 
 
     /**
      * 批量商品上下架
      *
-     * @param saleStatus  上下ON_SALE", "上架 OFF_SALE", "下架"),
-     * @param goodsIdList 商品id集合
+     * @param saleStatus 上下ON_SALE", "上架 OFF_SALE", "下架"),
+     * @param goodIdList 商品id集合
      * @return BaseResult
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public BaseResult batchUpdateSaleStatus(String saleStatus, List<Long> goodsIdList) {
-        if (StringUtils.isEmpty(saleStatus) || goodsIdList == null || goodsIdList.size() == 0) {
+    public BaseResult batchUpdateSaleStatus(String saleStatus, List<Long> goodIdList) {
+        if (StringUtils.isEmpty(saleStatus) || goodIdList == null || goodIdList.size() == 0) {
             return BaseResult.parameterError();
         }
-        sellerGoodMapper.batchUpdateSaleStatus(saleStatus, goodsIdList);
+        sellerGoodMapper.batchUpdateSaleStatus(saleStatus, goodIdList);
         String action = CommonEnum.ON_SALE.getCode().equals(saleStatus) ? "商品批量上架" : "商品批量下架";
-        goodsIdList.forEach(id -> saveGoodLog(id, "", action));
+        goodIdList.forEach(id -> saveGoodLog(id, "", action));
         return BaseResult.success(action + "成功");
     }
 
@@ -219,14 +217,19 @@ public class SellerGoodServiceImpl implements SellerGoodService {
         if (!StringUtils.isEmpty(params.getSearchKey())) {
             params.setSearchKey("%" + params.getSearchKey() + "%");
         }
+        params.setEndDate(ServiceCommon.formatDate(params.getEndDate()));
+        params.setStartDate(ServiceCommon.formatDate(params.getStartDate()));
         Page<GoodExt> page;
-        if (CommonEnum.UNBIND_CATEGORY.getCode().equals(params.getType())) {
+        boolean getUnbindCategory = CommonEnum.UNBIND_CATEGORY.getCode().equals(params.getType());
+        boolean getBindActivity = CommonEnum.BIND_ACTIVITY.getCode().equals(params.getType());
+        boolean getUnbindActivity = CommonEnum.UNBIND_ACTIVITY.getCode().equals(params.getType());
+        if (getUnbindCategory) {
             //未绑定类目的商品列表
             page = sellerGoodMapper.findForCategory(params);
-        } else if (CommonEnum.BIND_ACTIVITY.getCode().equals(params.getType())) {
+        } else if (getBindActivity) {
             //已经绑定活动的商品列表搜索
             page = sellerGoodMapper.findByActivityId(params);
-        } else if (CommonEnum.UNBIND_ACTIVITY.getCode().equals(params.getType())) {
+        } else if (getUnbindActivity) {
             //未绑定活动的商品列表
             page = sellerGoodMapper.findForActivity(params);
         } else {
