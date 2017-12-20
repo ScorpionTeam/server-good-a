@@ -41,7 +41,7 @@ public interface GoodMapper {
      * @param count  正数为添加、负数为扣减
      * @return
      */
-    int modifyGoodsDeduction(@Param("goodId") Long goodId,
+    int updateDeduction(@Param("goodId") Long goodId,
                              @Param("count") Integer count);
 
     /**
@@ -76,7 +76,7 @@ public interface GoodMapper {
      * @param idList 商品id
      * @return
      */
-    int batchDeleteGood(@Param("idList") List<Long> idList);
+    int deleteByIdList(@Param("idList") List<Long> idList);
 
     /**
      * 库存反还

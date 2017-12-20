@@ -42,7 +42,7 @@ public interface GoodService {
     BaseResult updateGood(GoodExt goods);
 
     /**
-     * ss
+     * 分页条件查询商品
      *
      * @param goodRequestParams
      * @return
@@ -72,7 +72,7 @@ public interface GoodService {
      * @param idList 商品id集合
      * @return
      */
-    BaseResult batchDeleteGood(List<Long> idList);
+    BaseResult deleteByIdList(List<Long> idList);
 
     /**
      * 商品库存减扣
@@ -81,7 +81,7 @@ public interface GoodService {
      * @param count 扣减、增加数量
      * @return BaseResult
      */
-    BaseResult modifyGoodsDeduction(Long id, Integer count);
+    BaseResult updateDeduction(Long id, Integer count);
 
     /**
      * 批量商品上下架

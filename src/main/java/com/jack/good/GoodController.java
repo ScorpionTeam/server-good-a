@@ -51,10 +51,10 @@ public class GoodController {
      *
      * @return
      */
-    @PostMapping(value = "/batchDeleteGood")
-    public BaseResult batchDeleteGood(@RequestBody JSONObject jsonObject) {
+    @PostMapping(value = "/deleteByIdList")
+    public BaseResult deleteByIdList(@RequestBody JSONObject jsonObject) {
         List<Long> idList = jsonObject.getJSONArray("idList").toJavaList(Long.class);
-        return goodService.batchDeleteGood(idList);
+        return goodService.deleteByIdList(idList);
     }
 
     /**
@@ -69,6 +69,11 @@ public class GoodController {
     }
 
 
+    /**
+     * 分页条件查询商品
+     * @param goodRequestParams
+     * @return
+     */
     @PostMapping(value = "/findByCondition")
     public PageResult findByCondition(@RequestBody GoodRequestParams goodRequestParams) {
         return goodService.findByCondition(goodRequestParams);
@@ -125,9 +130,9 @@ public class GoodController {
      * @param id    商品id，主键
      * @return
      */
-    @GetMapping(value = "/modifyGoodDeduction")
-    public BaseResult modifyGoodsDeduction(Long id, Integer count) {
-        return goodService.modifyGoodsDeduction(id, count);
+    @GetMapping(value = "/updateDeduction")
+    public BaseResult updateDeduction(Long id, Integer count) {
+        return goodService.updateDeduction(id, count);
     }
 
     /**

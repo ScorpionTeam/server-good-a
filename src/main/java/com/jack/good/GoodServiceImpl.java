@@ -198,7 +198,7 @@ public class GoodServiceImpl implements GoodService {
         }
         List<Long> idList = new ArrayList<>();
         idList.add(id);
-        int result = goodMapper.batchDeleteGood(idList);
+        int result = goodMapper.deleteByIdList(idList);
         if (result > 0) {
             return BaseResult.success("删除商品成功");
         }
@@ -213,11 +213,11 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     @Override
-    public BaseResult batchDeleteGood(List<Long> idList) {
+    public BaseResult deleteByIdList(List<Long> idList) {
         if (idList == null || idList.size() == 0) {
             return BaseResult.parameterError();
         }
-        int result = goodMapper.batchDeleteGood(idList);
+        int result = goodMapper.deleteByIdList(idList);
         if (result == 0) {
             return BaseResult.error("ERROR", "商品未下架，不能删除");
         }
@@ -230,9 +230,16 @@ public class GoodServiceImpl implements GoodService {
         return BaseResult.success("删除成功");
     }
 
+
+    /**
+     * 修改商品库存
+     * @param id    商品id--主键
+     * @param count 扣减、增加数量
+     * @return
+     */
     @Override
-    public BaseResult modifyGoodsDeduction(Long id, Integer count) {
-        int result = goodMapper.modifyGoodsDeduction(id, count);
+    public BaseResult updateDeduction(Long id, Integer count) {
+        int result = goodMapper.updateDeduction(id, count);
         if (result > 0) {
             GoodExt good = goodMapper.findById(id);
             saveGoodLog(good.getGoodName(), "修改商品库存", good.getId());
@@ -262,6 +269,13 @@ public class GoodServiceImpl implements GoodService {
         return BaseResult.success(action + "成功");
     }
 
+
+    /**
+     * 分页条件查询商品
+     *
+     * @param requestParams
+     * @return
+     */
     @Override
     public PageResult findByCondition(GoodRequestParams requestParams) {
         PageHelper.startPage(requestParams.getPageNo(), requestParams.getPageSize());
