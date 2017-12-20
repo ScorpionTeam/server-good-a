@@ -19,7 +19,7 @@ public class GoodController {
 
 
     @Autowired
-    GoodService goodService;
+    private GoodService goodService;
 
     /**
      * 创建商品

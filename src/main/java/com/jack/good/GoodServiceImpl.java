@@ -31,7 +31,7 @@ public class GoodServiceImpl implements GoodService {
     private FileOperationMapper fileOperationMapper;
 
     @Autowired
-    CategoryGoodMapper categoryGoodMapper;
+    private CategoryGoodMapper categoryGoodMapper;
 
     /**
      * 创建商品
