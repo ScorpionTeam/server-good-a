@@ -103,9 +103,9 @@ public class GoodController {
      * @param id         商品id
      * @return
      */
-    @GetMapping(value = "/modifySaleStatus")
-    public BaseResult modifySaleStatus(String saleStatus, Long id) {
-        return goodService.modifySaleStatus(saleStatus, id);
+    @GetMapping(value = "/updateSaleStatus")
+    public BaseResult updateSaleStatus(String saleStatus, Long id) {
+        return goodService.updateSaleStatus(saleStatus, id);
     }
 
     /**
