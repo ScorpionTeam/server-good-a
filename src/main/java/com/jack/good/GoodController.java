@@ -41,8 +41,8 @@ public class GoodController {
      * @param id 商品id
      * @return
      */
-    @GetMapping(value = "/deleteById")
-    public BaseResult deleteById(Long id) {
+    @GetMapping(value = "/deleteById/{id}")
+    public BaseResult deleteById(@PathVariable("id") Long id) {
         return goodService.deleteGoodsById(id);
     }
 
@@ -63,8 +63,8 @@ public class GoodController {
      * @param id 商品id
      * @return
      */
-    @GetMapping(value = "/findById")
-    public BaseResult findByGoodId(Long id) {
+    @GetMapping(value = "/findById/{id}")
+    public BaseResult findByGoodId(@PathVariable("id") Long id) {
         return goodService.findByGoodId(id);
     }
 
@@ -130,8 +130,9 @@ public class GoodController {
      * @param id    商品id，主键
      * @return
      */
-    @GetMapping(value = "/updateDeduction")
-    public BaseResult updateDeduction(Long id, Integer count) {
+    @GetMapping(value = "/updateDeduction/{id}/{count}")
+    public BaseResult updateDeduction(@PathVariable("id") Long id,
+                                      @PathVariable("count") Integer count) {
         return goodService.updateDeduction(id, count);
     }
 
