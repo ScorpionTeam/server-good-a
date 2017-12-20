@@ -269,6 +269,13 @@ public class GoodServiceImpl implements GoodService {
         return BaseResult.success(action + "成功");
     }
 
+
+    /**
+     * 分页条件查询商品
+     *
+     * @param requestParams
+     * @return
+     */
     @Override
     public PageResult findByCondition(GoodRequestParams requestParams) {
         PageHelper.startPage(requestParams.getPageNo(), requestParams.getPageSize());

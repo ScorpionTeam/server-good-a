@@ -42,7 +42,7 @@ public interface GoodService {
     BaseResult updateGood(GoodExt goods);
 
     /**
-     * ss
+     * 分页条件查询商品
      *
      * @param goodRequestParams
      * @return
