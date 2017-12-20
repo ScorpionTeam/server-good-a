@@ -81,7 +81,7 @@ public interface GoodService {
      * @param count 扣减、增加数量
      * @return BaseResult
      */
-    BaseResult modifyGoodsDeduction(Long id, Integer count);
+    BaseResult updateDeduction(Long id, Integer count);
 
     /**
      * 批量商品上下架

@@ -119,7 +119,7 @@
     </select>
 
     <!--库存扣减-->
-    <update id="modifyGoodsDeduction">
+    <update id="updateDeduction">
         UPDATE t_good SET stock=stock+#{count} WHERE id=#{goodId}
     </update>
 
